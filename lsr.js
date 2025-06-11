@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storedPassword === password) {
       alert("Login successful!");
       // Redirect to resume screening page after login
-      window.location.href = "file:///C:/Users/WELCOME/Desktop/new/r2.html";
+      window.location.href = "file:///C:/Users/WELCOME/Desktop/m/r.html";
     } else {
       alert("Invalid username or password!");
     }
