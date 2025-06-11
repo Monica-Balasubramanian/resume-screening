@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storedPassword === password) {
       alert("Login successful!");
       // Redirect to resume screening page after login
-      window.location.href = "file:///C:/Users/WELCOME/Desktop/m/r.html";
+      window.location.href = https://github.com/Monica-Balasubramanian/resume-screening/blob/main/lr2.html";
     } else {
       alert("Invalid username or password!");
     }
