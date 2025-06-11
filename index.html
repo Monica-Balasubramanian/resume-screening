@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Screening</title>
+  <link rel="stylesheet" href="r2.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h1>📄 Resume Screening & Candidate Profiling</h1>
+      <h2>📌 Job Description & Resumes</h2>
+      <textarea id="jobDesc" placeholder="📝 Enter Job Description..."></textarea>
+      <input type="file" id="resumeUpload" multiple accept=".pdf,.docx"/>
+      <button onclick="processResumes()">🚀 Process & Rank Resumes</button>
+    </div>
+
+    <div class="main">
+      
+      <table id="resultsTable">
+  
+        <tbody>
+          <!-- Results will appear here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function processResumes() {
+      const jobDesc = document.getElementById("jobDesc").value.trim();
+      const resumes = document.getElementById("resumeUpload").files;
+      const tableBody = document.querySelector("#resultsTable tbody");
+      tableBody.innerHTML = "";
+
+      if (!jobDesc || resumes.length === 0) {
+        alert("Please provide both job description and upload resumes.");
+        return;
+      }
+
+      const sampleSkills = ["Python", "Java", "SQL", "Machine Learning", "AWS", "React", "Node.js"];
+      
+      Array.from(resumes).forEach((file) => {
+        const randomSkills = sampleSkills.sort(() => 0.5 - Math.random()).slice(0, 3);
+        const randomScore = Math.floor(Math.random() * 41) + 60; // 60–100
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${file.name}</td>
+          <td>${randomSkills.join(", ")}</td>
+          <td>${randomScore}%</td>
+          <td><button onclick="viewCandidate('${file.name}', '${randomSkills.join(", ")}', ${randomScore})">View</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function viewCandidate(name, skills, score) {
+  const candidateData = { name, skills, score };
+  localStorage.setItem("selectedCandidate", JSON.stringify(candidateData));
+
+  // Optional: Show a brief toast notification before redirecting
+  showToast(`Viewing profile of ${name}...`);
+
+  // Redirect after a short delay for better UX
+  setTimeout(() => {
+    window.location.href = "c.html";
+  }, 1500);
+}
+
+// Toast notification helper function
+function showToast(message) {
+  // Create toast container if not exists
+  if (!document.getElementById("toastContainer")) {
+    const container = document.createElement("div");
+    container.id = "toastContainer";
+    Object.assign(container.style, {
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      zIndex: 9999,
+      fontFamily: "'Poppins', sans-serif",
+    });
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  Object.assign(toast.style, {
+    background: "rgba(255, 120, 150, 0.9)",
+    color: "#fff",
+    padding: "12px 20px",
+    marginTop: "10px",
+    borderRadius: "25px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.25)",
+    opacity: "1",
+    transition: "opacity 0.5s ease",
+  });
+
+  document.getElementById("toastContainer").appendChild(toast);
+
+  // Fade out and remove toast after 2 seconds
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    setTimeout(() => toast.remove(), 500);
+  }, 2000);
+}
+
+  </script>
+</body>
+</html>

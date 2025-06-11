@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Candidate Profile</title>
+  <link rel="stylesheet" href="c.css"/>
+</head>
+<body>
+  <div class="container">
+    <div class="main">
+      <h1>👤 Candidate Profile</h1>
+      <p><strong>Name:</strong> <span id="cName"></span></p>
+      <p><strong>Skills:</strong> <span id="cSkills"></span></p>
+      <p><strong>Match Score:</strong> <span id="cScore"></span></p>
+      <a href="r2.html">⬅️ Back to Resume List</a>
+    </div>
+  </div>
+
+  <script>
+    const candidate = JSON.parse(localStorage.getItem("selectedCandidate"));
+    if (candidate) {
+      document.getElementById("cName").textContent = candidate.name;
+      document.getElementById("cSkills").textContent = candidate.skills;
+      document.getElementById("cScore").textContent = candidate.score + "%";
+    } else {
+      document.querySelector(".main").innerHTML = "<p>No candidate data found.</p>";
+    }
+  </script>
+</body>
+</html>
